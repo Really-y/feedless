@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# extension/quota.js + content.js + content.css → userscript/dm-only.user.js (iPhone Safari "Userscripts" tətbiqi üçün)
+# Builds userscript/dm-only.user.js (for the iPhone Safari "Userscripts" app)
+# from extension/quota.js + content.js + content.css.
 # Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -12,7 +13,7 @@ mkdir -p userscript
   cat <<EOF
 // ==UserScript==
 // @name         DM Only (Instagram + TikTok)
-// @description  Instagram və TikTok-da yalnız mesajlar: Reels, For You, Explore və feed bloklanır.
+// @description  Messages only on Instagram and TikTok. Blocks Reels, For You, Explore and the feed.
 // @version      ${version}
 // @author       Azedev — Yusif Ezizov (https://www.azedev.com)
 // @homepageURL  https://github.com/Really-y/social-media-blocker
@@ -23,8 +24,8 @@ mkdir -p userscript
 // @inject-into  content
 // @grant        none
 // ==/UserScript==
-// AVTOMATİK YARADILIB — redaktə etmə. Mənbə: extension/quota.js, extension/content.js, extension/content.css
-// (Userscript-də storage yoxdur → həmişə yalnız-DM rejimi)
+// AUTO-GENERATED — do not edit. Source: extension/quota.js, extension/content.js, extension/content.css
+// (The userscript has no storage → always messages-only mode)
 
 (() => {
   const css = $(node -e 'process.stdout.write(JSON.stringify(require("fs").readFileSync("extension/content.css","utf8")))');
@@ -37,4 +38,4 @@ EOF
   cat extension/quota.js extension/content.js
 } > "$out"
 
-echo "Yaradıldı: $out"
+echo "Built: $out"

@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-191918?style=flat-square"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.2.0-191918?style=flat-square">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-191918?style=flat-square">
   <img alt="Chrome" src="https://img.shields.io/badge/Chrome-MV3-efeeeb?style=flat-square&logo=googlechrome&logoColor=191918">
   <img alt="Firefox" src="https://img.shields.io/badge/Firefox-desktop%20%2B%20Android-efeeeb?style=flat-square&logo=firefoxbrowser&logoColor=191918">
   <img alt="iPhone" src="https://img.shields.io/badge/iPhone-Safari-efeeeb?style=flat-square&logo=safari&logoColor=191918">
@@ -49,8 +49,6 @@ a friend has sent you a reel, you tap it, and forty minutes later you're deep in
 
 A calm, warm-monochrome interface: serif numerals, minimal color, and Apple's fluid-interface principles.
 It follows your system's light or dark theme and respects `prefers-reduced-motion` and `prefers-contrast`.
-
-> The extension UI is currently in Azerbaijani. English UI strings are on the roadmap.
 
 ---
 
@@ -149,7 +147,7 @@ Single source of truth: edit `content.js`, run `./build-userscript.sh`, and the 
 - [x] TikTok: messages only
 - [x] Daily full-mode allowance
 - [x] iPhone Safari support
-- [ ] English UI
+- [x] English UI
 - [ ] Browser-policy lock (extension can't be removed without admin rights)
 - [ ] YouTube Shorts and Facebook Reels
 - [ ] Weekly statistics

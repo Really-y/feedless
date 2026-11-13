@@ -1,4 +1,7 @@
-/* DM rejimində naviqasiyada feed / Explore / Reels keçidlərini gizlət
+/* DM Only — in-page styles.
+   Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later. */
+
+/* Messages-only mode: hide feed / Explore / Reels links in navigation
    (Instagram: Home/Explore/Reels/Stories; TikTok: For You/Following/Explore/Live/Friends) */
 html.igdm-dm a[href="/"],
 html.igdm-dm a[href^="/explore"],
@@ -16,12 +19,12 @@ html.igdm-dm a[href^="https://www.tiktok.com/live"] {
   display: none !important;
 }
 
-/* Rejim oxunana və ya yönləndirmə bitənə qədər məzmun görünməsin */
+/* Keep content hidden until the mode is read or the redirect completes */
 html.igdm-blocked body {
   visibility: hidden !important;
 }
 
-/* ---- Gizlədilmiş məzmunun yerində sakit kart ---- */
+/* ---- Quiet card in place of hidden content ---- */
 .igdm-placeholder {
   --igdm-ink: #2f3437;
   --igdm-muted: #787774;
@@ -63,7 +66,7 @@ html.igdm-blocked body {
   }
 }
 
-/* ---- Toast: aşağıdan gələn, eyni yolla gedən şüşə material ---- */
+/* ---- Toast: glass material that enters and exits along the same path ---- */
 #igdm-toast {
   position: fixed;
   left: 50%;

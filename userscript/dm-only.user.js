@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DM Only (Instagram + TikTok)
-// @description  Instagram və TikTok-da yalnız mesajlar: Reels, For You, Explore və feed bloklanır.
-// @version      1.2.0
+// @description  Messages only on Instagram and TikTok. Blocks Reels, For You, Explore and the feed.
+// @version      1.3.0
 // @author       Azedev — Yusif Ezizov (https://www.azedev.com)
 // @homepageURL  https://github.com/Really-y/social-media-blocker
 // @license      AGPL-3.0-or-later
@@ -11,27 +11,30 @@
 // @inject-into  content
 // @grant        none
 // ==/UserScript==
-// AVTOMATİK YARADILIB — redaktə etmə. Mənbə: extension/quota.js, extension/content.js, extension/content.css
-// (Userscript-də storage yoxdur → həmişə yalnız-DM rejimi)
+// AUTO-GENERATED — do not edit. Source: extension/quota.js, extension/content.js, extension/content.css
+// (The userscript has no storage → always messages-only mode)
 
 (() => {
-  const css = "/* DM rejimində naviqasiyada feed / Explore / Reels keçidlərini gizlət\n   (Instagram: Home/Explore/Reels/Stories; TikTok: For You/Following/Explore/Live/Friends) */\nhtml.igdm-dm a[href=\"/\"],\nhtml.igdm-dm a[href^=\"/explore\"],\nhtml.igdm-dm a[href^=\"/reels\"],\nhtml.igdm-dm a[href^=\"/stories\"],\nhtml.igdm-dm a[href^=\"/foryou\"],\nhtml.igdm-dm a[href^=\"/following\"],\nhtml.igdm-dm a[href^=\"/friends\"],\nhtml.igdm-dm a[href^=\"/live\"],\nhtml.igdm-dm a[href=\"https://www.tiktok.com/\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/foryou\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/explore\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/following\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/live\"] {\n  display: none !important;\n}\n\n/* Rejim oxunana və ya yönləndirmə bitənə qədər məzmun görünməsin */\nhtml.igdm-blocked body {\n  visibility: hidden !important;\n}\n\n/* ---- Gizlədilmiş məzmunun yerində sakit kart ---- */\n.igdm-placeholder {\n  --igdm-ink: #2f3437;\n  --igdm-muted: #787774;\n  --igdm-line: #eaeaea;\n  --igdm-surface: #fbfbfa;\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  max-width: 280px;\n  padding: 10px 14px;\n  border: 1px solid var(--igdm-line);\n  border-radius: 12px;\n  background: var(--igdm-surface);\n  color: var(--igdm-ink);\n  font: 500 13px/1.35 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", system-ui, sans-serif;\n  letter-spacing: -0.005em;\n  user-select: none;\n  animation: igdm-in 420ms cubic-bezier(0.16, 1, 0.3, 1);\n}\n.igdm-placeholder svg {\n  flex: none;\n  width: 16px;\n  height: 16px;\n  color: var(--igdm-muted);\n}\n.igdm-placeholder small {\n  display: block;\n  color: var(--igdm-muted);\n  font: 10px/1.4 \"SF Mono\", ui-monospace, monospace;\n  letter-spacing: 0.06em;\n  text-transform: uppercase;\n}\n@media (prefers-color-scheme: dark) {\n  .igdm-placeholder {\n    --igdm-ink: #ededec;\n    --igdm-muted: #9b9a97;\n    --igdm-line: rgba(255, 255, 255, 0.1);\n    --igdm-surface: #202020;\n  }\n}\n\n/* ---- Toast: aşağıdan gələn, eyni yolla gedən şüşə material ---- */\n#igdm-toast {\n  position: fixed;\n  left: 50%;\n  bottom: 28px;\n  z-index: 2147483647;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 16px;\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  border-radius: 12px;\n  background: rgba(24, 24, 23, 0.82);\n  -webkit-backdrop-filter: blur(20px) saturate(180%);\n  backdrop-filter: blur(20px) saturate(180%);\n  color: #f5f5f4;\n  font: 500 13px/1.3 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", system-ui, sans-serif;\n  letter-spacing: -0.005em;\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);\n  pointer-events: none;\n  opacity: 0;\n  transform: translate(-50%, 12px) scale(0.98);\n  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 360ms cubic-bezier(0.16, 1, 0.3, 1);\n}\n#igdm-toast.show {\n  opacity: 1;\n  transform: translate(-50%, 0) scale(1);\n}\n#igdm-toast svg { width: 15px; height: 15px; opacity: 0.8; }\n\n@keyframes igdm-in {\n  from { opacity: 0; transform: translateY(4px); }\n  to { opacity: 1; transform: none; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .igdm-placeholder { animation: none; }\n  #igdm-toast { transform: translate(-50%, 0); transition: opacity 160ms ease; }\n}\n@media (prefers-reduced-transparency: reduce) {\n  #igdm-toast { background: #181817; -webkit-backdrop-filter: none; backdrop-filter: none; }\n}\n";
+  const css = "/* DM Only — in-page styles.\n   Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later. */\n\n/* Messages-only mode: hide feed / Explore / Reels links in navigation\n   (Instagram: Home/Explore/Reels/Stories; TikTok: For You/Following/Explore/Live/Friends) */\nhtml.igdm-dm a[href=\"/\"],\nhtml.igdm-dm a[href^=\"/explore\"],\nhtml.igdm-dm a[href^=\"/reels\"],\nhtml.igdm-dm a[href^=\"/stories\"],\nhtml.igdm-dm a[href^=\"/foryou\"],\nhtml.igdm-dm a[href^=\"/following\"],\nhtml.igdm-dm a[href^=\"/friends\"],\nhtml.igdm-dm a[href^=\"/live\"],\nhtml.igdm-dm a[href=\"https://www.tiktok.com/\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/foryou\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/explore\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/following\"],\nhtml.igdm-dm a[href^=\"https://www.tiktok.com/live\"] {\n  display: none !important;\n}\n\n/* Keep content hidden until the mode is read or the redirect completes */\nhtml.igdm-blocked body {\n  visibility: hidden !important;\n}\n\n/* ---- Quiet card in place of hidden content ---- */\n.igdm-placeholder {\n  --igdm-ink: #2f3437;\n  --igdm-muted: #787774;\n  --igdm-line: #eaeaea;\n  --igdm-surface: #fbfbfa;\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  max-width: 280px;\n  padding: 10px 14px;\n  border: 1px solid var(--igdm-line);\n  border-radius: 12px;\n  background: var(--igdm-surface);\n  color: var(--igdm-ink);\n  font: 500 13px/1.35 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", system-ui, sans-serif;\n  letter-spacing: -0.005em;\n  user-select: none;\n  animation: igdm-in 420ms cubic-bezier(0.16, 1, 0.3, 1);\n}\n.igdm-placeholder svg {\n  flex: none;\n  width: 16px;\n  height: 16px;\n  color: var(--igdm-muted);\n}\n.igdm-placeholder small {\n  display: block;\n  color: var(--igdm-muted);\n  font: 10px/1.4 \"SF Mono\", ui-monospace, monospace;\n  letter-spacing: 0.06em;\n  text-transform: uppercase;\n}\n@media (prefers-color-scheme: dark) {\n  .igdm-placeholder {\n    --igdm-ink: #ededec;\n    --igdm-muted: #9b9a97;\n    --igdm-line: rgba(255, 255, 255, 0.1);\n    --igdm-surface: #202020;\n  }\n}\n\n/* ---- Toast: glass material that enters and exits along the same path ---- */\n#igdm-toast {\n  position: fixed;\n  left: 50%;\n  bottom: 28px;\n  z-index: 2147483647;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 16px;\n  border: 1px solid rgba(255, 255, 255, 0.08);\n  border-radius: 12px;\n  background: rgba(24, 24, 23, 0.82);\n  -webkit-backdrop-filter: blur(20px) saturate(180%);\n  backdrop-filter: blur(20px) saturate(180%);\n  color: #f5f5f4;\n  font: 500 13px/1.3 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", system-ui, sans-serif;\n  letter-spacing: -0.005em;\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);\n  pointer-events: none;\n  opacity: 0;\n  transform: translate(-50%, 12px) scale(0.98);\n  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 360ms cubic-bezier(0.16, 1, 0.3, 1);\n}\n#igdm-toast.show {\n  opacity: 1;\n  transform: translate(-50%, 0) scale(1);\n}\n#igdm-toast svg { width: 15px; height: 15px; opacity: 0.8; }\n\n@keyframes igdm-in {\n  from { opacity: 0; transform: translateY(4px); }\n  to { opacity: 1; transform: none; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .igdm-placeholder { animation: none; }\n  #igdm-toast { transform: translate(-50%, 0); transition: opacity 160ms ease; }\n}\n@media (prefers-reduced-transparency: reduce) {\n  #igdm-toast { background: #181817; -webkit-backdrop-filter: none; backdrop-filter: none; }\n}\n";
   const style = document.createElement("style");
   style.textContent = css;
   (document.head || document.documentElement).appendChild(style);
 })();
 
-// Gündəlik "tam rejim" limiti. content.js və popup.js tərəfindən istifadə olunur.
-// Storage yoxdursa (məs. iPhone userscript) Quota.storage === null olur və həmişə DM rejimi işləyir.
+// Daily "full mode" allowance. Used by content.js and popup.js.
+// Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
+//
+// When storage is unavailable (e.g. the iPhone userscript), Quota.storage is null
+// and the content script always stays in messages-only mode.
 const Quota = (() => {
   "use strict";
 
   const DEFAULTS = {
     mode: "dm", // "dm" | "full"
-    dailyLimitMin: 120, // tam rejim üçün gündəlik limit (dəqiqə)
-    pendingLimitMin: null, // artırılmış limit — yalnız sabahdan qüvvəyə minir
-    usageDate: "", // "YYYY-MM-DD" (yerli vaxt)
-    usedSec: 0, // bu gün tam rejimdə keçirilən vaxt
+    dailyLimitMin: 120, // daily full-mode allowance in minutes
+    pendingLimitMin: null, // a raised limit; only takes effect tomorrow
+    usageDate: "", // "YYYY-MM-DD" (local time)
+    usedSec: 0, // seconds spent in full mode today
   };
 
   const storage = globalThis.chrome?.storage?.local ?? null;
@@ -42,7 +45,7 @@ const Quota = (() => {
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   }
 
-  // Yeni gün: sərf olunan vaxtı sıfırla, DM rejiminə qayıt, gözləyən limiti tətbiq et
+  // New day: reset usage, return to messages-only, apply any pending limit
   function rollover(s) {
     const t = today();
     if (s.usageDate === t) return s;
@@ -72,7 +75,7 @@ const Quota = (() => {
     return load();
   }
 
-  // Azaltmaq dərhal, artırmaq yalnız sabahdan
+  // Lowering applies immediately; raising only from tomorrow
   async function setLimit(min) {
     const s = await load();
     min = Math.max(0, Math.min(24 * 60, Math.round(min)));
@@ -96,21 +99,23 @@ const Quota = (() => {
 
   return { storage, load, remainingSec, isFull, setMode, setLimit, addUsage };
 })();
+// DM Only — keeps Instagram and TikTok to messages only.
+// Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 (() => {
   "use strict";
 
-  // ---- Ayarlar ----
+  // ---- Settings ----
   const CONFIG = {
-    // DM-də göndərilən reel/post keçidlərini placeholder ilə əvəz et
+    // Replace reel/post links shared in chats with a placeholder card
     hideSharedReels: true,
-    // DM-də bütün videoları gizlət (reel önizləmələri bəzən sadəcə <video> kimi gəlir).
-    // Dostların göndərdiyi şəxsi videolar da gizlənir — istəmirsənsə false et.
+    // Hide every video inside chats (shared reel previews sometimes arrive as a bare <video>).
+    // Personal videos from friends are hidden too — set to false if you don't want that.
     hideDmVideos: true,
   };
 
   const TICK_SEC = 5;
 
-  // Hər sayt üçün: DM rejimində yalnız mesajlar + giriş/təhlükəsizlik axınları açıqdır
+  // Per site: in messages-only mode, only chats plus login/security flows are allowed
   const SITES = [
     {
       host: /(^|\.)instagram\.com$/,
@@ -152,11 +157,11 @@ const Quota = (() => {
   const isAllowed = (path) => site.allowed.some((re) => re.test(path));
   const root = document.documentElement;
 
-  // full = tam rejim aktivdir və bu gün üçün vaxt qalıb
+  // full = full mode is on and there is time left today
   let full = false;
-  let ready = !Quota.storage; // storage yoxdursa (userscript) dərhal DM rejimi
+  let ready = !Quota.storage; // no storage (userscript) → messages-only right away
 
-  // ---- Redirect (yönləndirmə dövrəsindən qorunma ilə) ----
+  // ---- Redirect (with loop protection) ----
   const LOOP_KEY = "igdm-redirects";
 
   function tooManyRedirects() {
@@ -175,13 +180,13 @@ const Quota = (() => {
 
   function enforce() {
     root.classList.toggle("igdm-dm", !full);
-    if (!ready) return; // rejim hələ oxunmayıb — səhifə gizli qalır
+    if (!ready) return; // mode not read yet — keep the page hidden
     if (full || isAllowed(location.pathname)) {
       root.classList.remove("igdm-blocked");
       return;
     }
     root.classList.add("igdm-blocked");
-    if (tooManyRedirects()) return; // ilişib qalmasın; səhifə gizli qalır
+    if (tooManyRedirects()) return; // don't get stuck in a loop; page stays hidden
     location.replace(INBOX);
   }
 
@@ -190,12 +195,12 @@ const Quota = (() => {
     const wasFull = full;
     full = Quota.isFull(s);
     ready = true;
-    // Tam rejim yenicə açıldısa, gizlədilmiş elementləri qaytarmaq üçün yenilə
+    // Full mode was just turned on — reload to restore hidden elements
     if (!wasFull && full && placeholdersInserted) {
       location.reload();
       return;
     }
-    if (wasFull && !full) toast("Vaxt bitdi — yalnız mesajlar");
+    if (wasFull && !full) toast("Time's up — messages only");
     enforce();
     scrub();
   }
@@ -210,7 +215,7 @@ const Quota = (() => {
     enforce();
   }
 
-  // Instagram SPA-dır: URL dəyişikliklərini izlə
+  // Both sites are SPAs: watch for URL changes
   let lastHref = location.href;
   setInterval(() => {
     if (location.href !== lastHref) {
@@ -219,7 +224,7 @@ const Quota = (() => {
     }
   }, 200);
 
-  // ---- Tam rejimdə vaxtı say (yalnız aktiv, fokuslu tab) ----
+  // ---- Count full-mode time (only the visible, focused tab) ----
   if (Quota.storage) {
     setInterval(() => {
       if (full && document.visibilityState === "visible" && document.hasFocus()) {
@@ -228,7 +233,7 @@ const Quota = (() => {
     }, TICK_SEC * 1000);
   }
 
-  // ---- İcazəsiz keçidlərə klikləri kəs ----
+  // ---- Intercept clicks on blocked links ----
   function blockedTarget(el) {
     const a = el && el.closest ? el.closest("a[href]") : null;
     if (!a) return null;
@@ -247,14 +252,14 @@ const Quota = (() => {
     if (blockedTarget(e.target)) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      toast("Bu bölmə bağlıdır — yalnız mesajlar");
+      toast("This section is closed — messages only");
     }
   }
   for (const type of ["click", "auxclick"]) {
     document.addEventListener(type, onClick, true);
   }
 
-  // Sadə SVG ikonlar (DOM API ilə — innerHTML yoxdur)
+  // Simple SVG icons (built with the DOM API — no innerHTML)
   const SVG_NS = "http://www.w3.org/2000/svg";
   const ICONS = {
     lock: [["rect", { x: 4, y: 11, width: 16, height: 10, rx: 2 }], ["path", { d: "M8 11V7a4 4 0 0 1 8 0v4" }]],
@@ -297,7 +302,7 @@ const Quota = (() => {
     toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
   }
 
-  // ---- DM daxilində paylaşılan reel-ləri və videoları gizlət ----
+  // ---- Hide shared reels and videos inside chats ----
   let placeholdersInserted = false;
 
   function placeholder(text) {
@@ -320,7 +325,7 @@ const Quota = (() => {
         if (a.dataset.igdm) continue;
         a.dataset.igdm = "1";
         a.style.display = "none";
-        a.parentNode?.insertBefore(placeholder("Paylaşılan video gizlədildi"), a);
+        a.parentNode?.insertBefore(placeholder("Shared video hidden"), a);
       }
     }
 
@@ -333,12 +338,12 @@ const Quota = (() => {
           v.removeAttribute("autoplay");
         } catch {}
         v.style.display = "none";
-        v.parentNode?.insertBefore(placeholder("Video gizlədildi"), v);
+        v.parentNode?.insertBefore(placeholder("Video hidden"), v);
       }
     }
   }
 
-  // Videolar sonradan play() edilə bilər — gizlədilmiş videonu yenidən dayandır
+  // Videos can be play()-ed later — pause hidden ones again
   document.addEventListener(
     "play",
     (e) => {

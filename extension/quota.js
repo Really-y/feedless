@@ -1,14 +1,17 @@
-// Gündəlik "tam rejim" limiti. content.js və popup.js tərəfindən istifadə olunur.
-// Storage yoxdursa (məs. iPhone userscript) Quota.storage === null olur və həmişə DM rejimi işləyir.
+// Daily "full mode" allowance. Used by content.js and popup.js.
+// Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
+//
+// When storage is unavailable (e.g. the iPhone userscript), Quota.storage is null
+// and the content script always stays in messages-only mode.
 const Quota = (() => {
   "use strict";
 
   const DEFAULTS = {
     mode: "dm", // "dm" | "full"
-    dailyLimitMin: 120, // tam rejim üçün gündəlik limit (dəqiqə)
-    pendingLimitMin: null, // artırılmış limit — yalnız sabahdan qüvvəyə minir
-    usageDate: "", // "YYYY-MM-DD" (yerli vaxt)
-    usedSec: 0, // bu gün tam rejimdə keçirilən vaxt
+    dailyLimitMin: 120, // daily full-mode allowance in minutes
+    pendingLimitMin: null, // a raised limit; only takes effect tomorrow
+    usageDate: "", // "YYYY-MM-DD" (local time)
+    usedSec: 0, // seconds spent in full mode today
   };
 
   const storage = globalThis.chrome?.storage?.local ?? null;
@@ -19,7 +22,7 @@ const Quota = (() => {
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   }
 
-  // Yeni gün: sərf olunan vaxtı sıfırla, DM rejiminə qayıt, gözləyən limiti tətbiq et
+  // New day: reset usage, return to messages-only, apply any pending limit
   function rollover(s) {
     const t = today();
     if (s.usageDate === t) return s;
@@ -49,7 +52,7 @@ const Quota = (() => {
     return load();
   }
 
-  // Azaltmaq dərhal, artırmaq yalnız sabahdan
+  // Lowering applies immediately; raising only from tomorrow
   async function setLimit(min) {
     const s = await load();
     min = Math.max(0, Math.min(24 * 60, Math.round(min)));

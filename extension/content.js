@@ -1,18 +1,20 @@
+// DM Only — keeps Instagram and TikTok to messages only.
+// Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 (() => {
   "use strict";
 
-  // ---- Ayarlar ----
+  // ---- Settings ----
   const CONFIG = {
-    // DM-də göndərilən reel/post keçidlərini placeholder ilə əvəz et
+    // Replace reel/post links shared in chats with a placeholder card
     hideSharedReels: true,
-    // DM-də bütün videoları gizlət (reel önizləmələri bəzən sadəcə <video> kimi gəlir).
-    // Dostların göndərdiyi şəxsi videolar da gizlənir — istəmirsənsə false et.
+    // Hide every video inside chats (shared reel previews sometimes arrive as a bare <video>).
+    // Personal videos from friends are hidden too — set to false if you don't want that.
     hideDmVideos: true,
   };
 
   const TICK_SEC = 5;
 
-  // Hər sayt üçün: DM rejimində yalnız mesajlar + giriş/təhlükəsizlik axınları açıqdır
+  // Per site: in messages-only mode, only chats plus login/security flows are allowed
   const SITES = [
     {
       host: /(^|\.)instagram\.com$/,
@@ -54,11 +56,11 @@
   const isAllowed = (path) => site.allowed.some((re) => re.test(path));
   const root = document.documentElement;
 
-  // full = tam rejim aktivdir və bu gün üçün vaxt qalıb
+  // full = full mode is on and there is time left today
   let full = false;
-  let ready = !Quota.storage; // storage yoxdursa (userscript) dərhal DM rejimi
+  let ready = !Quota.storage; // no storage (userscript) → messages-only right away
 
-  // ---- Redirect (yönləndirmə dövrəsindən qorunma ilə) ----
+  // ---- Redirect (with loop protection) ----
   const LOOP_KEY = "igdm-redirects";
 
   function tooManyRedirects() {
@@ -77,13 +79,13 @@
 
   function enforce() {
     root.classList.toggle("igdm-dm", !full);
-    if (!ready) return; // rejim hələ oxunmayıb — səhifə gizli qalır
+    if (!ready) return; // mode not read yet — keep the page hidden
     if (full || isAllowed(location.pathname)) {
       root.classList.remove("igdm-blocked");
       return;
     }
     root.classList.add("igdm-blocked");
-    if (tooManyRedirects()) return; // ilişib qalmasın; səhifə gizli qalır
+    if (tooManyRedirects()) return; // don't get stuck in a loop; page stays hidden
     location.replace(INBOX);
   }
 
@@ -92,12 +94,12 @@
     const wasFull = full;
     full = Quota.isFull(s);
     ready = true;
-    // Tam rejim yenicə açıldısa, gizlədilmiş elementləri qaytarmaq üçün yenilə
+    // Full mode was just turned on — reload to restore hidden elements
     if (!wasFull && full && placeholdersInserted) {
       location.reload();
       return;
     }
-    if (wasFull && !full) toast("Vaxt bitdi — yalnız mesajlar");
+    if (wasFull && !full) toast("Time's up — messages only");
     enforce();
     scrub();
   }
@@ -112,7 +114,7 @@
     enforce();
   }
 
-  // Instagram SPA-dır: URL dəyişikliklərini izlə
+  // Both sites are SPAs: watch for URL changes
   let lastHref = location.href;
   setInterval(() => {
     if (location.href !== lastHref) {
@@ -121,7 +123,7 @@
     }
   }, 200);
 
-  // ---- Tam rejimdə vaxtı say (yalnız aktiv, fokuslu tab) ----
+  // ---- Count full-mode time (only the visible, focused tab) ----
   if (Quota.storage) {
     setInterval(() => {
       if (full && document.visibilityState === "visible" && document.hasFocus()) {
@@ -130,7 +132,7 @@
     }, TICK_SEC * 1000);
   }
 
-  // ---- İcazəsiz keçidlərə klikləri kəs ----
+  // ---- Intercept clicks on blocked links ----
   function blockedTarget(el) {
     const a = el && el.closest ? el.closest("a[href]") : null;
     if (!a) return null;
@@ -149,14 +151,14 @@
     if (blockedTarget(e.target)) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      toast("Bu bölmə bağlıdır — yalnız mesajlar");
+      toast("This section is closed — messages only");
     }
   }
   for (const type of ["click", "auxclick"]) {
     document.addEventListener(type, onClick, true);
   }
 
-  // Sadə SVG ikonlar (DOM API ilə — innerHTML yoxdur)
+  // Simple SVG icons (built with the DOM API — no innerHTML)
   const SVG_NS = "http://www.w3.org/2000/svg";
   const ICONS = {
     lock: [["rect", { x: 4, y: 11, width: 16, height: 10, rx: 2 }], ["path", { d: "M8 11V7a4 4 0 0 1 8 0v4" }]],
@@ -199,7 +201,7 @@
     toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
   }
 
-  // ---- DM daxilində paylaşılan reel-ləri və videoları gizlət ----
+  // ---- Hide shared reels and videos inside chats ----
   let placeholdersInserted = false;
 
   function placeholder(text) {
@@ -222,7 +224,7 @@
         if (a.dataset.igdm) continue;
         a.dataset.igdm = "1";
         a.style.display = "none";
-        a.parentNode?.insertBefore(placeholder("Paylaşılan video gizlədildi"), a);
+        a.parentNode?.insertBefore(placeholder("Shared video hidden"), a);
       }
     }
 
@@ -235,12 +237,12 @@
           v.removeAttribute("autoplay");
         } catch {}
         v.style.display = "none";
-        v.parentNode?.insertBefore(placeholder("Video gizlədildi"), v);
+        v.parentNode?.insertBefore(placeholder("Video hidden"), v);
       }
     }
   }
 
-  // Videolar sonradan play() edilə bilər — gizlədilmiş videonu yenidən dayandır
+  // Videos can be play()-ed later — pause hidden ones again
   document.addEventListener(
     "play",
     (e) => {

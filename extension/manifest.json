@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "DM Only (Instagram + TikTok)",
-  "version": "1.2.0",
-  "description": "Instagram və TikTok-da yalnız mesajlar: Reels, For You, Explore və feed bloklanır.",
+  "version": "1.3.0",
+  "description": "Messages only on Instagram and TikTok. Blocks Reels, For You, Explore and the feed.",
   "homepage_url": "https://github.com/Really-y/social-media-blocker",
   "browser_specific_settings": {
     "gecko": {
