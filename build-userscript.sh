@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-# Builds userscript/dm-only.user.js (for the iPhone Safari "Userscripts" app)
+# Builds userscript/feedless.user.js (for the iPhone Safari "Userscripts" app)
 # from extension/quota.js + content.js + content.css.
 # Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 version=$(node -p 'require("./extension/manifest.json").version')
-out=userscript/dm-only.user.js
+out=userscript/feedless.user.js
 mkdir -p userscript
 
 {
   cat <<EOF
 // ==UserScript==
-// @name         DM Only (Instagram + TikTok)
+// @name         Feedless
 // @description  Messages only on Instagram and TikTok. Blocks Reels, For You, Explore and the feed.
 // @version      ${version}
 // @author       Azedev — Yusif Ezizov (https://www.azedev.com)
-// @homepageURL  https://github.com/Really-y/social-media-blocker
+// @homepageURL  https://github.com/Really-y/feedless
 // @license      AGPL-3.0-or-later
 // @match        *://*.instagram.com/*
 // @match        *://*.tiktok.com/*

@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "DM Only (Instagram + TikTok)",
-  "version": "1.3.0",
+  "name": "Feedless",
+  "version": "1.4.0",
   "description": "Messages only on Instagram and TikTok. Blocks Reels, For You, Explore and the feed.",
-  "homepage_url": "https://github.com/Really-y/social-media-blocker",
+  "homepage_url": "https://github.com/Really-y/feedless",
   "browser_specific_settings": {
     "gecko": {
-      "id": "instagram-dm-only@local",
+      "id": "feedless@azedev.com",
       "strict_min_version": "115.0"
     },
     "gecko_android": {
@@ -15,7 +15,7 @@
   },
   "permissions": ["storage"],
   "action": {
-    "default_title": "DM Only",
+    "default_title": "Feedless",
     "default_popup": "popup.html"
   },
   "content_scripts": [

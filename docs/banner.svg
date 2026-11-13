@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="DM Only — messages only on social media">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="Feedless — messages only on social media">
   <style>
     .bg { fill: #fbfbfa; }
     .ink { fill: #191918; }
@@ -41,7 +41,7 @@
 
   <!-- Left: wordmark -->
   <text x="120" y="112" class="mono muted" font-size="15" letter-spacing="2.2">AZEDEV · OPEN SOURCE</text>
-  <text x="114" y="222" class="serif ink" font-size="112" letter-spacing="-4">DM Only</text>
+  <text x="114" y="222" class="serif ink" font-size="112" letter-spacing="-4">Feedless</text>
   <text x="120" y="276" class="sans muted" font-size="24" letter-spacing="-0.2">Messages only on social media.</text>
   <text x="120" y="308" class="sans muted" font-size="24" letter-spacing="-0.2">Reels, For You and the feed stay closed.</text>
 

@@ -1,4 +1,4 @@
-// DM Only — popup.
+// Feedless — popup.
 // Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 (() => {
   "use strict";

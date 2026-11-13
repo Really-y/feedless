@@ -1,4 +1,4 @@
-// DM Only — keeps Instagram and TikTok to messages only.
+// Feedless — keeps Instagram and TikTok to messages only.
 // Copyright (C) 2026 Azedev — Yusif Ezizov. AGPL-3.0-or-later.
 (() => {
   "use strict";
@@ -210,7 +210,7 @@
     div.className = "igdm-placeholder";
     const body = document.createElement("div");
     const meta = document.createElement("small");
-    meta.textContent = "DM Only";
+    meta.textContent = "Feedless";
     body.append(meta, document.createTextNode(text));
     div.append(icon("eyeOff"), body);
     return div;

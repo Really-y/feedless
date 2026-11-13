@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="DM Only: messages only on Instagram and TikTok" width="100%">
+  <img src="docs/banner.svg" alt="Feedless: messages only on Instagram and TikTok" width="100%">
 </p>
 
 <p align="center">
   <a href="LICENSE"><img alt="License: AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-191918?style=flat-square"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-191918?style=flat-square">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.4.0-191918?style=flat-square">
   <img alt="Chrome" src="https://img.shields.io/badge/Chrome-MV3-efeeeb?style=flat-square&logo=googlechrome&logoColor=191918">
   <img alt="Firefox" src="https://img.shields.io/badge/Firefox-desktop%20%2B%20Android-efeeeb?style=flat-square&logo=firefoxbrowser&logoColor=191918">
   <img alt="iPhone" src="https://img.shields.io/badge/iPhone-Safari-efeeeb?style=flat-square&logo=safari&logoColor=191918">
@@ -22,7 +22,7 @@ Most people can't simply quit social media, because their friends, family and wo
 The trouble is that every chat sits one tap away from the feed: you open the app to answer a message,
 a friend has sent you a reel, you tap it, and forty minutes later you're still scrolling For You.
 
-DM Only keeps the chat pages working and sends every other page back to your inbox.
+Feedless keeps the chat pages working and sends every other page back to your inbox.
 
 | | |
 |---|---|
@@ -74,7 +74,7 @@ Raising the limit ........ Takes effect tomorrow, so it can't be raised on impul
 
 ### Chrome / Brave / Edge
 
-1. Clone the repo: `git clone https://github.com/Really-y/social-media-blocker.git`
+1. Clone the repo: `git clone https://github.com/Really-y/feedless.git`
 2. Open `chrome://extensions` and enable **Developer mode**
 3. Click **Load unpacked** and select the `extension/` folder
 4. Pin the extension to your toolbar
@@ -96,7 +96,7 @@ On Android: Firefox → Settings → About Firefox → tap the logo 5 times → 
 ### iPhone (Safari)
 
 1. Install the free **Userscripts** app from the App Store
-2. Copy [`userscript/dm-only.user.js`](userscript/dm-only.user.js) into your Userscripts folder
+2. Copy [`userscript/feedless.user.js`](userscript/feedless.user.js) into your Userscripts folder
 3. Settings → Apps → Safari → Extensions → **Userscripts** → enable it and allow the sites
 4. Delete the Instagram and TikTok apps and add the sites from Safari via **Add to Home Screen**
 5. Screen Time → Content & Privacy → **Installing Apps: Don't Allow**, and have someone else set the passcode
@@ -142,7 +142,7 @@ The iPhone userscript is generated from the extension files. After editing `cont
 
 ## Limitations
 
-- Instagram and TikTok change their HTML often. If blocked content starts showing up again, [open an issue](https://github.com/Really-y/social-media-blocker/issues).
+- Instagram and TikTok change their HTML often. If blocked content starts showing up again, [open an issue](https://github.com/Really-y/feedless/issues).
 - It works at the browser level, so it needs to be installed in every browser you use.
 - It can currently be disabled from `chrome://extensions`. A lock feature is on the roadmap.
 
