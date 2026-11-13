@@ -2,7 +2,7 @@
 // @name         DM Only (Instagram + TikTok)
 // @description  Instagram və TikTok-da yalnız mesajlar: Reels, For You, Explore və feed bloklanır.
 // @version      1.2.0
-// @author       Azedev — Yusif Ezizov
+// @author       Azedev — Yusif Ezizov (https://www.azedev.com)
 // @homepageURL  https://github.com/Really-y/social-media-blocker
 // @license      AGPL-3.0-or-later
 // @match        *://*.instagram.com/*

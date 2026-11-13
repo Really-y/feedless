@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="DM Only — sosial mediada yalnız mesajlar" width="100%">
+  <img src="docs/banner.svg" alt="DM Only — messages only on social media" width="100%">
 </p>
 
 <p align="center">
@@ -8,170 +8,175 @@
   <img alt="Chrome" src="https://img.shields.io/badge/Chrome-MV3-efeeeb?style=flat-square&logo=googlechrome&logoColor=191918">
   <img alt="Firefox" src="https://img.shields.io/badge/Firefox-desktop%20%2B%20Android-efeeeb?style=flat-square&logo=firefoxbrowser&logoColor=191918">
   <img alt="iPhone" src="https://img.shields.io/badge/iPhone-Safari-efeeeb?style=flat-square&logo=safari&logoColor=191918">
+  <a href="https://www.azedev.com"><img alt="Azedev" src="https://img.shields.io/badge/by-Azedev-191918?style=flat-square"></a>
 </p>
 
 <p align="center">
-  <b>Dostlarınla əlaqədə qal. Sonsuz scroll-dan çıx.</b><br>
-  <sub>Azedev — Yusif Ezizov tərəfindən hazırlanıb</sub>
+  <b>Stay in touch with your friends. Step out of the infinite scroll.</b><br>
+  <sub>Built by <a href="https://www.azedev.com">Azedev</a> — Yusif Ezizov</sub>
 </p>
 
 ---
 
-## Hədəf və məqsəd
+## Goal & Purpose
 
-Sosial medianı tam tərk etmək çox vaxt real seçim deyil: dostlar, ailə və iş yazışmaları oradadır.
-Problem mesajlarda deyil, **mesajların qapı olmasındadır**. Bir mesaja cavab yazmaq üçün girirsən,
-dostun reel göndərib, açırsan və 40 dəqiqə sonra özünü For You səhifəsində tapırsan.
+Quitting social media entirely is rarely realistic: friends, family and work conversations all live there.
+The problem isn't the messages. It's that **messages are a doorway**. You open the app to reply to one text,
+a friend has sent you a reel, you tap it, and forty minutes later you're deep in the For You feed.
 
-**DM Only** bu qapını bağlayır, amma əlaqəni saxlayır.
+**DM Only** closes that doorway and keeps the conversation open.
 
 | | |
 |---|---|
-| **Hədəf** | Instagram və TikTok-u yalnız yazışma alətinə çevirmək: mesajlar işləsin, diqqət oğurlayan lent işləməsin. |
-| **Məqsəd** | İmpulsla açılan scroll-u texniki olaraq çətinləşdirmək. İradəyə yox, mühitə güvənmək. |
-| **Prinsip** | Tam qadağa yox, **şüurlu limit**: gündə müəyyən vaxt tam rejim, qalan vaxt yalnız mesajlar. |
-| **Gizlilik** | Şifrə, token və ya server yoxdur. Hər şey sənin brauzerində işləyir, heç bir məlumat kənara getmir. |
+| **Goal** | Turn Instagram and TikTok into messaging tools: chats keep working, the attention-harvesting feed doesn't. |
+| **Purpose** | Make impulsive scrolling technically harder. Rely on your environment, not your willpower. |
+| **Principle** | No total ban. **A deliberate limit** instead: a set amount of full access per day, messages only the rest of the time. |
+| **Privacy** | No passwords, no tokens, no server. Everything runs in your browser and no data leaves it. |
 
 ---
 
-## Görünüş
+## Preview
 
 <p align="center">
-  <img src="docs/popup-dm.png" alt="Yalnız mesajlar rejimi" width="260">
+  <img src="docs/popup-dm.png" alt="Messages-only mode" width="260">
   &nbsp;
-  <img src="docs/popup-full.png" alt="Tam rejim, vaxt sayılır" width="260">
+  <img src="docs/popup-full.png" alt="Full mode, time is counting" width="260">
   &nbsp;
-  <img src="docs/popup-dark.png" alt="Qaranlıq tema" width="260">
+  <img src="docs/popup-dark.png" alt="Dark theme" width="260">
 </p>
 
-<p align="center"><sub>Yalnız mesajlar &nbsp;·&nbsp; Tam rejim (vaxt sayılır) &nbsp;·&nbsp; Qaranlıq tema</sub></p>
+<p align="center"><sub>Messages only &nbsp;·&nbsp; Full mode (time counting) &nbsp;·&nbsp; Dark theme</sub></p>
 
-Sakit, isti monoxrom interfeys: serif rəqəmlər, minimal rəng və Apple-in fluid interface prinsipləri.
-Sistemin açıq və ya qaranlıq temasına, `prefers-reduced-motion` və `prefers-contrast` ayarlarına uyğunlaşır.
+A calm, warm-monochrome interface: serif numerals, minimal color, and Apple's fluid-interface principles.
+It follows your system's light or dark theme and respects `prefers-reduced-motion` and `prefers-contrast`.
+
+> The extension UI is currently in Azerbaijani. English UI strings are on the roadmap.
 
 ---
 
-## Nə edir
+## What it does
 
-| Platforma | Açıq qalır | Bloklanır |
+| Platform | Stays open | Blocked |
 |---|---|---|
-| **Instagram** | `/direct/` (bütün DM-lər), login, 2FA, hesab ayarları | Feed, Reels, Explore, Stories, profillər, postlar |
-| **TikTok** | `/messages`, login, ayarlar | For You, Following, Explore, Live, profillər, videolar |
+| **Instagram** | `/direct/` (all DMs), login, 2FA, account settings | Feed, Reels, Explore, Stories, profiles, posts |
+| **TikTok** | `/messages`, login, settings | For You, Following, Explore, Live, profiles, videos |
 
-- **Yönləndirmə.** Bloklanmış səhifəyə keçid avtomatik mesajlara qaytarır. Bu, Instagram və TikTok-un SPA naviqasiyasında da işləyir.
-- **Mesajda gələn videolar.** Dostun göndərdiyi reel və ya TikTok videosu sakit bir kartla əvəz olunur, ona görə scroll-a düşmürsən.
-- **Təmiz menyu.** Home, Reels, Explore və For You düymələri gizlədilir.
-- **Gündəlik limit.** Tam rejim default olaraq **gündə 120 dəqiqədir** və iki platforma üçün ortaqdır.
-- **VPN təsir etmir.** Extension brauzerin içində işləyir.
+- **Redirects.** Any link to a blocked page sends you back to your inbox. This also works with Instagram's and TikTok's in-app (SPA) navigation.
+- **Shared videos in chats.** A reel or TikTok a friend sends you is replaced with a quiet card, so there's nothing to fall into.
+- **Clean navigation.** Home, Reels, Explore and For You buttons are hidden.
+- **Daily allowance.** Full mode defaults to **120 minutes a day**, shared across both platforms.
+- **VPN-proof.** The extension runs inside the browser, so a VPN doesn't bypass it.
 
-### Gündəlik limit qaydaları
+### Daily limit rules
 
 ```text
-Default rejim ............ Yalnız mesajlar
-Tam rejim ................ Popup-dan açılır, vaxt yalnız aktiv tabda sayılır
-Vaxt bitəndə ............. Avtomatik "yalnız mesajlar"a qayıdır
-Gecə yarısı .............. Sayğac sıfırlanır, rejim yenə "yalnız mesajlar"
-Limiti azaltmaq .......... Dərhal tətbiq olunur
-Limiti artırmaq .......... Yalnız sabahdan (impulsla artırmağın qarşısını alır)
+Default mode ............. Messages only
+Full mode ................ Turned on from the popup; time counts only while the tab is active
+When time runs out ....... Switches back to messages only automatically
+At midnight .............. Counter resets, mode returns to messages only
+Lowering the limit ....... Takes effect immediately
+Raising the limit ........ Takes effect tomorrow (stops impulsive increases)
 ```
 
 ---
 
-## Quraşdırma
+## Installation
 
 ### Chrome / Brave / Edge
 
-1. Repo-nu yüklə: `git clone https://github.com/Really-y/social-media-blocker.git`
-2. `chrome://extensions` aç və **Developer mode**-u yandır
-3. **Load unpacked** bas və `extension/` qovluğunu seç
-4. Extension ikonunu toolbara bərkit
+1. Clone the repo: `git clone https://github.com/Really-y/social-media-blocker.git`
+2. Open `chrome://extensions` and enable **Developer mode**
+3. Click **Load unpacked** and select the `extension/` folder
+4. Pin the extension to your toolbar
 
 ### Firefox (desktop + Android)
 
-**Tez test:** `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → `extension/manifest.json`
+**Quick test:** `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → `extension/manifest.json`
 
-**Daimi quraşdırma:** Firefox yalnız imzalanmış extension-ları daimi quraşdırır. İmzalamaq pulsuzdur:
+**Permanent install:** Firefox only installs signed extensions permanently. Signing is free:
 
 ```bash
 npx web-ext sign --source-dir extension --channel unlisted \
   --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET"
 ```
 
-API açarlarını [addons.mozilla.org](https://addons.mozilla.org/developers/addon/api/key/) saytından al.
-Android-də: Firefox → Settings → About Firefox → loqoya 5 dəfə toxun → **Install extension from file**.
+Get your API keys at [addons.mozilla.org](https://addons.mozilla.org/developers/addon/api/key/).
+On Android: Firefox → Settings → About Firefox → tap the logo 5 times → **Install extension from file**.
 
 ### iPhone (Safari)
 
-1. App Store-dan pulsuz **Userscripts** tətbiqini qur
-2. [`userscript/dm-only.user.js`](userscript/dm-only.user.js) faylını Userscripts qovluğuna köçür
-3. Settings → Apps → Safari → Extensions → **Userscripts** → aktiv et və saytlara icazə ver
-4. Instagram və TikTok tətbiqlərini sil, saytları Safari-dən **Add to Home Screen** ilə əlavə et
-5. Screen Time → Content & Privacy → **Installing Apps: Don't Allow**. Parolu başqası qoysun.
+1. Install the free **Userscripts** app from the App Store
+2. Copy [`userscript/dm-only.user.js`](userscript/dm-only.user.js) into your Userscripts folder
+3. Settings → Apps → Safari → Extensions → **Userscripts** → enable it and allow the sites
+4. Delete the Instagram and TikTok apps and add the sites from Safari via **Add to Home Screen**
+5. Screen Time → Content & Privacy → **Installing Apps: Don't Allow**. Have someone else set the passcode.
 
-> iPhone versiyasında gündəlik limit yoxdur: orada həmişə yalnız mesajlar açılır.
+> The iPhone version has no daily limit: it is always messages only.
 
 ---
 
-## Necə işləyir
+## How it works
 
 ```text
-                ┌──────────────────────────────┐
-  URL dəyişir → │  content.js (document_start) │
-                └──────────────┬───────────────┘
-                               │
-                 quota.js → tam rejim aktivdir?
-                       │                 │
-                     bəli               xeyr
-                       │                 │
-                  toxunma         yol icazəlidir? ── xeyr → /direct/inbox və ya /messages
-                                         │
-                                       bəli → DM daxilində videoları gizlət
+                   ┌──────────────────────────────┐
+  URL changes  →   │  content.js (document_start) │
+                   └──────────────┬───────────────┘
+                                  │
+                   quota.js → is full mode active?
+                          │                 │
+                         yes                no
+                          │                 │
+                    leave as is     is the path allowed? ── no → /direct/inbox or /messages
+                                            │
+                                           yes → hide videos inside chats
 ```
 
-| Fayl | Rolu |
+| File | Role |
 |---|---|
-| `extension/manifest.json` | Manifest V3. Chrome və Firefox üçün ortaqdır |
-| `extension/content.js` | Yönləndirmə, klik bloku, DM-də video gizlətmə |
-| `extension/quota.js` | Gündəlik limit məntiqi (`chrome.storage.local`) |
-| `extension/popup.*` | Premium popup interfeysi |
-| `build-userscript.sh` | Extension-dan iPhone userscript-ini yaradır |
+| `extension/manifest.json` | Manifest V3, shared by Chrome and Firefox |
+| `extension/content.js` | Redirects, click blocking, hiding videos in chats |
+| `extension/quota.js` | Daily limit logic (`chrome.storage.local`) |
+| `extension/popup.*` | The popup interface |
+| `build-userscript.sh` | Generates the iPhone userscript from the extension |
 
-Kod tək mənbədən işləyir: `content.js`-i dəyiş, sonra `./build-userscript.sh` işlət, iPhone versiyası da yenilənir.
+Single source of truth: edit `content.js`, run `./build-userscript.sh`, and the iPhone version is updated too.
 
 ---
 
-## Yol xəritəsi
+## Roadmap
 
-- [x] Instagram: yalnız DM
-- [x] TikTok: yalnız mesajlar
-- [x] Gündəlik tam rejim limiti
-- [x] iPhone Safari dəstəyi
-- [ ] Brauzer policy ilə kilid (extension sudo olmadan silinə bilməsin)
-- [ ] YouTube Shorts və Facebook Reels
-- [ ] Həftəlik statistika
+- [x] Instagram: DMs only
+- [x] TikTok: messages only
+- [x] Daily full-mode allowance
+- [x] iPhone Safari support
+- [ ] English UI
+- [ ] Browser-policy lock (extension can't be removed without admin rights)
+- [ ] YouTube Shorts and Facebook Reels
+- [ ] Weekly statistics
 
-## Məhdudiyyətlər
+## Limitations
 
-- Instagram və TikTok HTML strukturunu tez-tez dəyişir. Bir şey görünməyə başlasa, [issue aç](https://github.com/Really-y/social-media-blocker/issues).
-- Extension brauzer səviyyəsində işləyir. Başqa brauzerdə də quraşdırılmalıdır.
-- Hazırda `chrome://extensions`-dan söndürmək mümkündür. Kilid funksiyası yol xəritəsindədir.
+- Instagram and TikTok change their HTML often. If something starts showing up again, [open an issue](https://github.com/Really-y/social-media-blocker/issues).
+- It works at the browser level, so it needs to be installed in every browser you use.
+- It can currently be disabled from `chrome://extensions`. A lock feature is on the roadmap.
 
-## Töhfə
+## Contributing
 
-Pull request-lər açıqdır. Böyük dəyişikliklərdən əvvəl issue açıb müzakirə edək.
+Pull requests are welcome. For larger changes, please open an issue first so we can discuss it.
 
-## Lisenziya
+## License
 
-**GNU Affero General Public License v3.0**. Ətraflı: [LICENSE](LICENSE).
+**GNU Affero General Public License v3.0**. See [LICENSE](LICENSE).
 
-Kodu istifadə edə, dəyişdirə və paylaşa bilərsən, kommersiya məqsədilə də. Amma dəyişdirilmiş versiyanı
-paylasan **və ya şəbəkə üzərindən xidmət (SaaS) kimi təqdim etsən**, mənbə kodunu da eyni lisenziya ilə
-açmalı və müəllif qeydini saxlamalısan.
+You may use, modify and share this code, including commercially. But if you distribute a modified version
+**or offer it as a network service (SaaS)**, you must release its source code under the same license
+and keep the copyright notice.
 
 ```text
 Copyright (C) 2026 Azedev — Yusif Ezizov
+https://www.azedev.com
 ```
 
 <p align="center">
-  <sub><b>Azedev</b> — Yusif Ezizov tərəfindən hazırlanıb</sub>
+  <sub>Built by <a href="https://www.azedev.com"><b>Azedev</b></a> — Yusif Ezizov</sub>
 </p>
