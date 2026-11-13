@@ -1,0 +1,107 @@
+/* DM rejimində naviqasiyada feed / Explore / Reels keçidlərini gizlət
+   (Instagram: Home/Explore/Reels/Stories; TikTok: For You/Following/Explore/Live/Friends) */
+html.igdm-dm a[href="/"],
+html.igdm-dm a[href^="/explore"],
+html.igdm-dm a[href^="/reels"],
+html.igdm-dm a[href^="/stories"],
+html.igdm-dm a[href^="/foryou"],
+html.igdm-dm a[href^="/following"],
+html.igdm-dm a[href^="/friends"],
+html.igdm-dm a[href^="/live"],
+html.igdm-dm a[href="https://www.tiktok.com/"],
+html.igdm-dm a[href^="https://www.tiktok.com/foryou"],
+html.igdm-dm a[href^="https://www.tiktok.com/explore"],
+html.igdm-dm a[href^="https://www.tiktok.com/following"],
+html.igdm-dm a[href^="https://www.tiktok.com/live"] {
+  display: none !important;
+}
+
+/* Rejim oxunana və ya yönləndirmə bitənə qədər məzmun görünməsin */
+html.igdm-blocked body {
+  visibility: hidden !important;
+}
+
+/* ---- Gizlədilmiş məzmunun yerində sakit kart ---- */
+.igdm-placeholder {
+  --igdm-ink: #2f3437;
+  --igdm-muted: #787774;
+  --igdm-line: #eaeaea;
+  --igdm-surface: #fbfbfa;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 280px;
+  padding: 10px 14px;
+  border: 1px solid var(--igdm-line);
+  border-radius: 12px;
+  background: var(--igdm-surface);
+  color: var(--igdm-ink);
+  font: 500 13px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  letter-spacing: -0.005em;
+  user-select: none;
+  animation: igdm-in 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.igdm-placeholder svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--igdm-muted);
+}
+.igdm-placeholder small {
+  display: block;
+  color: var(--igdm-muted);
+  font: 10px/1.4 "SF Mono", ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+@media (prefers-color-scheme: dark) {
+  .igdm-placeholder {
+    --igdm-ink: #ededec;
+    --igdm-muted: #9b9a97;
+    --igdm-line: rgba(255, 255, 255, 0.1);
+    --igdm-surface: #202020;
+  }
+}
+
+/* ---- Toast: aşağıdan gələn, eyni yolla gedən şüşə material ---- */
+#igdm-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(24, 24, 23, 0.82);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  color: #f5f5f4;
+  font: 500 13px/1.3 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  letter-spacing: -0.005em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 12px) scale(0.98);
+  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+#igdm-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+#igdm-toast svg { width: 15px; height: 15px; opacity: 0.8; }
+
+@keyframes igdm-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .igdm-placeholder { animation: none; }
+  #igdm-toast { transform: translate(-50%, 0); transition: opacity 160ms ease; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  #igdm-toast { background: #181817; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

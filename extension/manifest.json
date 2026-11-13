@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "DM Only (Instagram + TikTok)",
+  "version": "1.2.0",
+  "description": "Instagram və TikTok-da yalnız mesajlar: Reels, For You, Explore və feed bloklanır.",
+  "homepage_url": "https://github.com/Really-y/social-media-blocker",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "instagram-dm-only@local",
+      "strict_min_version": "115.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "120.0"
+    }
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "DM Only",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.instagram.com/*", "*://*.tiktok.com/*"],
+      "js": ["quota.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ]
+}
