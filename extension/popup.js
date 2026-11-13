@@ -36,7 +36,9 @@
 
     // Hero
     $("time").innerHTML = renderTime(rem);
-    $("meta").textContent = full ? "Full mode on · time is counting" : "Full mode left today";
+    $("meta").textContent = full
+      ? "Counts only while the tab is active"
+      : "Full mode left today";
     $("progress").style.transform = `scaleX(${total > 0 ? rem / total : 0})`;
 
     // Primary action
@@ -50,8 +52,8 @@
         : `<span>Available again tomorrow</span>`;
 
     // Site statuses
-    $("s-ig").textContent = full ? "Fully open" : "Messages only";
-    $("s-tt").textContent = full ? "Fully open" : "Messages only";
+    $("s-ig").textContent = full ? "All pages open" : "Feed, Reels and Explore blocked";
+    $("s-tt").textContent = full ? "All pages open" : "For You, Live and Explore blocked";
 
     // Limit stepper
     $("limit").textContent = `${s.dailyLimitMin} min`;
@@ -62,10 +64,10 @@
     const note = $("note");
     if (s.pendingLimitMin != null) {
       note.className = "note pending";
-      note.textContent = `Limit becomes ${s.pendingLimitMin} min tomorrow.`;
+      note.textContent = `Tomorrow's limit: ${s.pendingLimitMin} min`;
     } else {
       note.className = "note";
-      note.textContent = "Lowering applies now, raising applies tomorrow.";
+      note.textContent = "A higher limit starts tomorrow.";
     }
   }
 

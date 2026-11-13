@@ -122,7 +122,7 @@
       background: var(--surface);
     }
     .site b { display: block; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; }
-    .site span { font-size: 11px; color: var(--muted); }
+    .site span { display: block; margin-top: 2px; font-size: 11px; line-height: 1.35; color: var(--muted); }
 
     .limit { display: flex; align-items: center; justify-content: space-between; }
     .limit-name { color: var(--ink); font-weight: 500; }
@@ -195,8 +195,8 @@
     <section class="rise" style="--i:3">
       <div class="label">Sites</div>
       <div class="sites">
-        <div class="site"><b>Instagram</b><span id="s-ig">Messages only</span></div>
-        <div class="site"><b>TikTok</b><span id="s-tt">Messages only</span></div>
+        <div class="site"><b>Instagram</b><span id="s-ig">Feed, Reels and Explore blocked</span></div>
+        <div class="site"><b>TikTok</b><span id="s-tt">For You, Live and Explore blocked</span></div>
       </div>
     </section>
 
@@ -209,7 +209,7 @@
           <button class="step" id="plus" aria-label="Increase by 15 minutes">+</button>
         </div>
       </div>
-      <div class="note" id="note">Lowering applies now, raising applies tomorrow.</div>
+      <div class="note" id="note">A higher limit starts tomorrow.</div>
     </section>
 
     <footer class="rise" style="--i:5">
