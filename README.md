@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="DM Only — messages only on social media" width="100%">
+  <img src="docs/banner.svg" alt="DM Only: messages only on Instagram and TikTok" width="100%">
 </p>
 
 <p align="center">
@@ -12,28 +12,24 @@
 </p>
 
 <p align="center">
-  <b>Stay in touch with your friends. Step out of the infinite scroll.</b><br>
+  <b>Instagram and TikTok messages without the feed.</b><br>
   <sub>Built by <a href="https://www.azedev.com">Azedev</a> — Yusif Ezizov</sub>
 </p>
 
----
+## Goal & purpose
 
-## Goal & Purpose
+Most people can't simply quit social media, because their friends, family and work chats live there.
+The trouble is that every chat sits one tap away from the feed: you open the app to answer a message,
+a friend has sent you a reel, you tap it, and forty minutes later you're still scrolling For You.
 
-Quitting social media entirely is rarely realistic: friends, family and work conversations all live there.
-The problem isn't the messages. It's that **messages are a doorway**. You open the app to reply to one text,
-a friend has sent you a reel, you tap it, and forty minutes later you're deep in the For You feed.
-
-**DM Only** closes that doorway and keeps the conversation open.
+DM Only keeps the chat pages working and sends every other page back to your inbox.
 
 | | |
 |---|---|
-| **Goal** | Turn Instagram and TikTok into messaging tools: chats keep working, the attention-harvesting feed doesn't. |
-| **Purpose** | Make impulsive scrolling technically harder. Rely on your environment, not your willpower. |
-| **Principle** | No total ban. **A deliberate limit** instead: a set amount of full access per day, messages only the rest of the time. |
-| **Privacy** | No passwords, no tokens, no server. Everything runs in your browser and no data leaves it. |
-
----
+| **Goal** | Make Instagram and TikTok usable for messaging only: chats work, while the feed, Reels and For You stay closed. |
+| **Purpose** | Put a technical step between you and impulsive scrolling, so that opening the feed takes a deliberate decision. |
+| **Daily allowance** | Full access is limited to a set time per day (120 minutes by default); the rest of the day is messages only. |
+| **Privacy** | The extension asks for no password or token and has no server. It runs in your browser and sends no data anywhere. |
 
 ## Preview
 
@@ -47,10 +43,8 @@ a friend has sent you a reel, you tap it, and forty minutes later you're deep in
 
 <p align="center"><sub>Messages only &nbsp;·&nbsp; Full mode (time counting) &nbsp;·&nbsp; Dark theme</sub></p>
 
-A calm, warm-monochrome interface: serif numerals, minimal color, and Apple's fluid-interface principles.
-It follows your system's light or dark theme and respects `prefers-reduced-motion` and `prefers-contrast`.
-
----
+The popup uses a warm monochrome palette with serif numerals, follows the system light or dark theme,
+and respects `prefers-reduced-motion` and `prefers-contrast`.
 
 ## What it does
 
@@ -59,11 +53,11 @@ It follows your system's light or dark theme and respects `prefers-reduced-motio
 | **Instagram** | `/direct/` (all DMs), login, 2FA, account settings | Feed, Reels, Explore, Stories, profiles, posts |
 | **TikTok** | `/messages`, login, settings | For You, Following, Explore, Live, profiles, videos |
 
-- **Redirects.** Any link to a blocked page sends you back to your inbox. This also works with Instagram's and TikTok's in-app (SPA) navigation.
-- **Shared videos in chats.** A reel or TikTok a friend sends you is replaced with a quiet card, so there's nothing to fall into.
-- **Clean navigation.** Home, Reels, Explore and For You buttons are hidden.
-- **Daily allowance.** Full mode defaults to **120 minutes a day**, shared across both platforms.
-- **VPN-proof.** The extension runs inside the browser, so a VPN doesn't bypass it.
+- Links to blocked pages redirect to your inbox, including navigation inside the Instagram and TikTok web apps.
+- Reels and TikTok videos that friends send in chats are replaced with a placeholder card and can't be opened.
+- The Home, Reels, Explore and For You buttons are hidden.
+- Full mode allows 120 minutes a day by default, shared between both platforms.
+- The extension runs inside the browser, so a VPN doesn't get around it.
 
 ### Daily limit rules
 
@@ -73,10 +67,8 @@ Full mode ................ Turned on from the popup; time counts only while the 
 When time runs out ....... Switches back to messages only automatically
 At midnight .............. Counter resets, mode returns to messages only
 Lowering the limit ....... Takes effect immediately
-Raising the limit ........ Takes effect tomorrow (stops impulsive increases)
+Raising the limit ........ Takes effect tomorrow, so it can't be raised on impulse
 ```
-
----
 
 ## Installation
 
@@ -107,11 +99,9 @@ On Android: Firefox → Settings → About Firefox → tap the logo 5 times → 
 2. Copy [`userscript/dm-only.user.js`](userscript/dm-only.user.js) into your Userscripts folder
 3. Settings → Apps → Safari → Extensions → **Userscripts** → enable it and allow the sites
 4. Delete the Instagram and TikTok apps and add the sites from Safari via **Add to Home Screen**
-5. Screen Time → Content & Privacy → **Installing Apps: Don't Allow**. Have someone else set the passcode.
+5. Screen Time → Content & Privacy → **Installing Apps: Don't Allow**, and have someone else set the passcode
 
-> The iPhone version has no daily limit: it is always messages only.
-
----
+The iPhone version has no daily limit; it always runs in messages-only mode.
 
 ## How it works
 
@@ -137,9 +127,7 @@ On Android: Firefox → Settings → About Firefox → tap the logo 5 times → 
 | `extension/popup.*` | The popup interface |
 | `build-userscript.sh` | Generates the iPhone userscript from the extension |
 
-Single source of truth: edit `content.js`, run `./build-userscript.sh`, and the iPhone version is updated too.
-
----
+The iPhone userscript is generated from the extension files. After editing `content.js`, run `./build-userscript.sh` to rebuild it.
 
 ## Roadmap
 
@@ -154,7 +142,7 @@ Single source of truth: edit `content.js`, run `./build-userscript.sh`, and the 
 
 ## Limitations
 
-- Instagram and TikTok change their HTML often. If something starts showing up again, [open an issue](https://github.com/Really-y/social-media-blocker/issues).
+- Instagram and TikTok change their HTML often. If blocked content starts showing up again, [open an issue](https://github.com/Really-y/social-media-blocker/issues).
 - It works at the browser level, so it needs to be installed in every browser you use.
 - It can currently be disabled from `chrome://extensions`. A lock feature is on the roadmap.
 
@@ -166,15 +154,11 @@ Pull requests are welcome. For larger changes, please open an issue first so we 
 
 **GNU Affero General Public License v3.0**. See [LICENSE](LICENSE).
 
-You may use, modify and share this code, including commercially. But if you distribute a modified version
-**or offer it as a network service (SaaS)**, you must release its source code under the same license
+You may use, modify and share this code, including commercially. If you distribute a modified version
+or offer it as a network service (SaaS), you must release its source code under the same license
 and keep the copyright notice.
 
 ```text
 Copyright (C) 2026 Azedev — Yusif Ezizov
 https://www.azedev.com
 ```
-
-<p align="center">
-  <sub>Built by <a href="https://www.azedev.com"><b>Azedev</b></a> — Yusif Ezizov</sub>
-</p>

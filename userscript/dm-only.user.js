@@ -200,7 +200,7 @@ const Quota = (() => {
       location.reload();
       return;
     }
-    if (wasFull && !full) toast("Time's up — messages only");
+    if (wasFull && !full) toast("Time's up. Back to messages only.");
     enforce();
     scrub();
   }
@@ -252,7 +252,7 @@ const Quota = (() => {
     if (blockedTarget(e.target)) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      toast("This section is closed — messages only");
+      toast("Blocked in messages-only mode");
     }
   }
   for (const type of ["click", "auxclick"]) {

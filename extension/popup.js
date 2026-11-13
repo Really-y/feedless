@@ -36,7 +36,7 @@
 
     // Hero
     $("time").innerHTML = renderTime(rem);
-    $("meta").textContent = full ? "Full mode on · time is counting" : "Full mode time left today";
+    $("meta").textContent = full ? "Full mode on · time is counting" : "Full mode left today";
     $("progress").style.transform = `scaleX(${total > 0 ? rem / total : 0})`;
 
     // Primary action
@@ -47,10 +47,10 @@
       ? `${ICON_LOCK}<span>Back to messages only</span>`
       : rem > 0
         ? `${ICON_UNLOCK}<span>Turn on full mode</span>`
-        : `<span>Back tomorrow</span>`;
+        : `<span>Available again tomorrow</span>`;
 
     // Site statuses
-    $("s-ig").textContent = full ? "Fully open" : "DMs only";
+    $("s-ig").textContent = full ? "Fully open" : "Messages only";
     $("s-tt").textContent = full ? "Fully open" : "Messages only";
 
     // Limit stepper
